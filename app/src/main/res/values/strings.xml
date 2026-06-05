@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CryptoTest</string>
+    <string name="coins">Coins</string>
+</resources>
