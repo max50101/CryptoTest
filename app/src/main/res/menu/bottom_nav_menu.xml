@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"     xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <item
         android:id="@+id/coinsFragment"
         android:icon="@drawable/ic_coins"
         android:title="@string/coins"/>
+
+    <item
+        android:id="@+id/coinsListFragment"
+        android:icon="@drawable/ic_crypto_list"
+        android:title="@string/coins_list"
+        />
 
 </menu>

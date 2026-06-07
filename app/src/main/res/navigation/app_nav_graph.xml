@@ -9,6 +9,12 @@
               android:label="Coins">
     </fragment>
 
+    <fragment
+        android:id="@+id/coinsListFragment"
+        android:name="com.example.coin_list.CoinListFragment"
+        android:label="Coin List">
+    </fragment>
+
 
 
 </navigation>

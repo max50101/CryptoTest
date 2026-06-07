@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coins.databinding.FragmentCoinsBinding
 import com.example.coins.di.CoinsFeatureInjector
@@ -34,6 +35,8 @@ class CoinsFragment(
         super.onViewCreated(view, savedInstanceState)
         binding.coinRecyclerView.adapter=adapter
         binding.coinRecyclerView.layoutManager= LinearLayoutManager(requireContext())
+        binding.coinRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(),
+            DividerItemDecoration.VERTICAL))
         viewModel.state.collectWithLifecycle { state -> render(state) }
         viewModel.events.collectWithLifecycle { event -> handle(event) }
     }

@@ -39,6 +39,7 @@ class CoinsViewModel(
            }.collect { coins -> _state.update { currentState-> currentState.copy(isLoading = false,coins=coins, errorMessage = null) } }
         }
     }
+
 }
 
 data class CoinsUiState(val isLoading: Boolean=false,val coins:List<Coin> =emptyList(), val errorMessage:String? =null)

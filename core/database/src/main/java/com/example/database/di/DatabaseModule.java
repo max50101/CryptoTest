@@ -22,13 +22,14 @@ public class DatabaseModule {
     @Provides
     static AppDatabase provideAppDatabase(Application application){
         return Room.databaseBuilder(application, AppDatabase.class,"crypto.db")
+                .fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        db.execSQL("INSERT INTO favoriteCoins(symbol,name,imageUrl,priceUsd) VALUES('BTC','Bitcoin',NULL,NULL)");
-                        db.execSQL("INSERT INTO favoriteCoins(symbol,name,imageUrl,priceUsd) VALUES('ETH','Ethereum',NULL,NULL)");
-                        db.execSQL("INSERT INTO favoriteCoins(symbol,name,imageUrl,priceUsd) VALUES('SOL','Solana',NULL,NULL)");
+                        db.execSQL("INSERT INTO coins(symbol,baseAsset,quoteAsset,priceUsd,status,isFavorite) VALUES('BTCUSDT','BTC','USDT',NULL,'TRADING',true)");
+                        db.execSQL("INSERT INTO coins(symbol,baseAsset,quoteAsset,priceUsd,status,isFavorite) VALUES('ETHUSDT','ETH','USDT',NULL,'TRADING',true)");
+                        db.execSQL("INSERT INTO coins(symbol,baseAsset,quoteAsset,priceUsd,status,isFavorite) VALUES('SOLUSDT','SOL','USDT',NULL,'TRADING',true)");
                     }
                 })
                 .build();

@@ -1,5 +1,6 @@
 package com.example.data.coins.api.websocket
 
+import android.util.Log
 import com.example.data.coins.model.BinanceTradeStreamDto
 import com.example.data.coins.model.PriceUpdated
 import com.example.network.NetworkSettings
@@ -48,6 +49,7 @@ class BinanceWebSocket @Inject constructor(val okHttp: OkHttpClient) {
             request,
             object : WebSocketListener() {
                 override fun onMessage(webSocket: WebSocket, text:String) {
+                    Log.d("Eth", "onMessage: $text")
                     val update: PriceUpdated? = parsePriceUpdate(text);
                     if(update!=null){
                         trySend(update)
@@ -59,6 +61,11 @@ class BinanceWebSocket @Inject constructor(val okHttp: OkHttpClient) {
                 }
                 override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
                     close()
+                }
+
+                override fun onOpen(webSocket: WebSocket, response: Response) {
+                    super.onOpen(webSocket, response)
+                    Log.d("Opened","gaz")
                 }
             }
         )

@@ -7,8 +7,9 @@ fun CoinsEntity.toCoin(): Coin {
     return Coin(
         symbol = symbol,
         priceUsd = priceUsd,
-        name = name,
-        iconUrl = imageUrl
+        baseAsset = baseAsset,
+        quoteAsset = quoteAsset,
+        isFavorite = isFavorite
     )
 }
 

@@ -6,6 +6,7 @@ import com.example.data.coins.api.CoinsApi
 import com.example.data.coins.api.websocket.BinanceWebSocket
 import com.example.data.coins.helpers.toBinanceSymbol
 import com.example.data.coins.helpers.toCoin
+import com.example.data.coins.model.toCoinEntity
 import com.example.database.features.CoinsDao
 import com.example.domain.coins.repository.CoinsRepository
 import com.example.model.Coin
@@ -13,22 +14,25 @@ import com.example.network.safeApiCall
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class CoinsRepositoryImp @Inject constructor(val coinsApi: CoinsApi, val binanceWebSocket: BinanceWebSocket, val coinsDao: CoinsDao): CoinsRepository {
+class CoinsRepositoryImp @Inject constructor(
+    private val coinsApi: CoinsApi,
+    private val binanceWebSocket: BinanceWebSocket,
+    private val coinsDao: CoinsDao): CoinsRepository {
 
     override fun observeFavoriteCoins(): Flow<List<Coin>> {
-      return  coinsDao.observeCoins()
+      return  coinsDao.observeFavoriteCoins()
           .map { entities -> entities.map { it->it.toCoin() } }
           .flatMapLatest { coinsFromDb->
               if(coinsFromDb.isEmpty()){
                   flowOf(emptyList())
               }else{
                   val symbols=coinsFromDb.map{coin->
-                        coin.toBinanceSymbol()
+                        coin.symbol
                   }
                   binanceWebSocket.observePrices(symbols)
                       .runningFold(coinsFromDb){currentCoins, priceUpdated->
                           currentCoins.map{coin->
-                              if(coin.toBinanceSymbol()==priceUpdated.symbol){
+                              if(coin.symbol==priceUpdated.symbol){
                                   coin.copy(priceUsd = priceUpdated.price)
                               }else{
                                   coin
@@ -46,15 +50,16 @@ class CoinsRepositoryImp @Inject constructor(val coinsApi: CoinsApi, val binance
     }
 
     override fun observeCoins(): Flow<List<Coin>> {
-        TODO("Not yet implemented")
+        return coinsDao.observeCoins().map { it->it.map{it.toCoin()} }
     }
 
     override suspend fun refreshCoins() {
-        TODO("Not yet implemented")
+         val coins=safeApiCall {  coinsApi.getCoinsList().symbols}
+         coinsDao.updateCoinsKeepingFavorite(coins.map { it.toCoinEntity() })
     }
 
-    override suspend fun toggleFavorite(id: String) {
-        TODO("Not yet implemented")
+    override suspend fun toggleFavorite(symbol: String) {
+        coinsDao.updateCoin(symbol)
     }
 
 }

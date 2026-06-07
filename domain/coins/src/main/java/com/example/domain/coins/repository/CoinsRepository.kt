@@ -10,5 +10,5 @@ interface CoinsRepository {
     fun observeCoins():Flow<List<Coin>>
 
     suspend fun refreshCoins()
-    suspend fun toggleFavorite(id:String)
+    suspend fun toggleFavorite(symbol:String)
 }
