@@ -1,6 +1,6 @@
 package com.example.data.coins.di;
 
-import com.example.data.coins.api.CoinsApi;
+
 import com.example.data.coins.api.websocket.BinanceWebSocket;
 import com.example.data.coins.impl.CoinsRepositoryImp;
 import com.example.domain.coins.repository.CoinsRepository;
@@ -15,10 +15,7 @@ import retrofit2.Retrofit;
 @Module
 public abstract class CoinsDataModule {
 
-    @Provides
-    static CoinsApi coinsApi(Retrofit retrofit){
-        return retrofit.create(CoinsApi.class);
-    }
+
 
     @Provides
     static BinanceWebSocket binanceWebSocket(OkHttpClient client){return  new BinanceWebSocket(client);}

@@ -15,6 +15,9 @@ interface CoinsDao {
     @Query("SELECT * FROM coins WHERE isFavorite=1")
     fun observeFavoriteCoins(): Flow<List<CoinsEntity>>
 
+
+    @Query("SELECT * FROM coins WHERE symbol=:symbol")
+    fun observeCoin(symbol: String):Flow<CoinsEntity>
     @Query("SELECT * FROM coins WHERE status='TRADING' ORDER BY isFavorite DESC")
     fun observeCoins():Flow<List<CoinsEntity>>
     @Query("""INSERT INTO coins(symbol, baseAsset, quoteAsset, priceUsd,  status, isFavorite)

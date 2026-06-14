@@ -1,4 +1,7 @@
 package com.example.coin_details.di
 
-class CoinDetailsFeatureInjector {
+import com.example.coin_details.CoinDetailsFragment
+
+interface CoinDetailsFeatureInjector {
+    fun inject(fragment: CoinDetailsFragment)
 }

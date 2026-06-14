@@ -1,4 +1,16 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="coin_icon">Coin icon\n</string>
+    <string name="favorite">Favorite\n</string>
+    <string name="_15m">15m</string>
+    <string name="_30m">30m</string>
+    <string name="_1h">1h</string>
+    <string name="_4h">4h</string>
+    <string name="_1d">1d</string>
+    <string name="_1w">1w</string>
+    <string name="_1M">1M</string>
+    <string name="price_chart">Price chart</string>
+    <string name="create_alert">Create alert</string>
+    <string name="open_notification">Open notification</string>
 </resources>

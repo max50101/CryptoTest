@@ -13,7 +13,7 @@ import com.example.coin_list.databinding.FragmentCoinListBinding
 import com.example.model.Coin
 import com.example.model.CoinsDiffCallback
 
-class CoinsListAdapter(private val onFavoriteClick: (coin: Coin) -> Unit) :
+class CoinsListAdapter(private val onFavoriteClick: (coin: Coin) -> Unit, private val onCoinClick:(coin: Coin)->Unit) :
     ListAdapter<Coin, CoinsListAdapter.CoinListViewHolder>(CoinsDiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,7 +27,7 @@ class CoinsListAdapter(private val onFavoriteClick: (coin: Coin) -> Unit) :
         holder: CoinListViewHolder,
         position: Int
     ) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position),{coin->onCoinClick(coin)})
     }
 
 
@@ -36,9 +36,9 @@ class CoinsListAdapter(private val onFavoriteClick: (coin: Coin) -> Unit) :
         val onFavoriteClick: (coin: Coin) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(coin: Coin) {
+        fun bind(coin: Coin,onCoinClick: (coin: Coin) -> Unit) {
+            binding.root.setOnClickListener { onCoinClick(coin) }
             val coinSymbolLower = coin.baseAsset.lowercase()
-
             val iconUrl =
                 "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/$coinSymbolLower.png"
             if (iconUrl != "") {

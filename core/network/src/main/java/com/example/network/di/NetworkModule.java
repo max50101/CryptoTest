@@ -1,6 +1,7 @@
 package com.example.network.di;
 
 import com.example.network.NetworkSettings;
+import com.example.network.api.CoinsApi;
 
 import javax.inject.Singleton;
 
@@ -20,6 +21,7 @@ public class NetworkModule {
                 .build();
     }
 
+
     @Singleton
     @Provides
     static Retrofit provideRetrofit(
@@ -30,5 +32,11 @@ public class NetworkModule {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    @Singleton
+    @Provides
+    static CoinsApi coinsApi(Retrofit retrofit){
+        return retrofit.create(CoinsApi.class);
     }
 }

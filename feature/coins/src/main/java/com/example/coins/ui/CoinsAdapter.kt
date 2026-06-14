@@ -14,7 +14,7 @@ import com.example.model.CoinsDiffCallback
 import java.util.Locale
 import java.util.Locale.getDefault
 
-class CoinsAdapter: ListAdapter<Coin, CoinsAdapter.CoinViewHolder> (CoinsDiffCallback){
+class CoinsAdapter(private val onCoinClick: (Coin) -> Unit): ListAdapter<Coin, CoinsAdapter.CoinViewHolder> (CoinsDiffCallback){
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,12 +31,15 @@ class CoinsAdapter: ListAdapter<Coin, CoinsAdapter.CoinViewHolder> (CoinsDiffCal
         position: Int
     ) {
         val coin=getItem(position)
-        holder.bind(coin)
+        holder.bind(coin,onCoinClick)
     }
 
 
     class CoinViewHolder(private val binding: CoinItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(coin: Coin){
+        fun bind(coin: Coin, onCoinClick:(Coin)->Unit){
+            binding.root.setOnClickListener {
+                onCoinClick(coin)
+            }
             val coinSymbolLower = coin.baseAsset.lowercase()
 
             val iconUrl =

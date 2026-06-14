@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <color name="screen_background">#F6F7FB</color>
+    <color name="card_background">#DCD7D7</color>
+    <color name="card_stroke">#E6E8EF</color>
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="favorite_yellow">#F5B301</color>
+    <color name="favorite_red">#DC143C</color>
+</resources>

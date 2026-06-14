@@ -34,6 +34,8 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.material)
     implementation(libs.dagger)
     implementation(libs.glide)
@@ -41,7 +43,9 @@ dependencies {
 
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
+    implementation(project(":core:navigation"))
     implementation(project(":domain:coins"))
+    implementation(project(":feature:coin-details"))
 
 
     testImplementation(libs.junit)

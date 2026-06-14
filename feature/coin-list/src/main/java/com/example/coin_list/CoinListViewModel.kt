@@ -1,5 +1,6 @@
     package com.example.coin_list
 
+    import androidx.lifecycle.SavedStateHandle
     import androidx.lifecycle.ViewModel
     import androidx.lifecycle.viewModelScope
     import com.example.domain.coins.usecases.ObserveCoinsUseCase
@@ -22,12 +23,13 @@
 
     class CoinListViewModel(private val refreshCoinsUseCase: RefreshCoinsUseCase,
                             private val observeCoinsUseCase: ObserveCoinsUseCase,
-                            private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+                            private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
+                            private val savedStateHandle: SavedStateHandle
     ) : ViewModel() {
 
         private val _isLoading=MutableStateFlow(false)
         private val _error= MutableStateFlow<String?>(null)
-        private val _searchQuarry= MutableStateFlow("")
+        private val _searchQuarry= savedStateHandle.getStateFlow(SEARCH_QUERY,"")
         private val _coins=MutableStateFlow<List<Coin>>(emptyList())
         val state: StateFlow<CoinListUiState> = combine(
             _isLoading, _coins, _searchQuarry.debounce(300).distinctUntilChanged(),_error,
@@ -83,7 +85,11 @@
         }
 
         fun search(text:String){
-            _searchQuarry.value=text
+            savedStateHandle[SEARCH_QUERY]=text
+        }
+
+        companion object{
+            private const val SEARCH_QUERY="search_query"
         }
 
     }

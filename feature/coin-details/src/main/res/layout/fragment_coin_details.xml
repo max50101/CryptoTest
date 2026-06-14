@@ -1,14 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coinDetailsScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CoinDetailsFragment">
+    android:fillViewport="true"
+    android:background="@color/screen_background">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/coinDetailsRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-</FrameLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/headerCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_stroke"
+            app:cardBackgroundColor="@color/card_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/coinImage"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:contentDescription="@string/coin_icon"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_coin_image_placeholder"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                    android:id="@+id/symbolText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="BTCUSDT"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintTop_toTopOf="@id/coinImage"
+                    app:layout_constraintStart_toEndOf="@id/coinImage"
+                    app:layout_constraintEnd_toStartOf="@id/favoriteButton" />
+
+                <TextView
+                    android:id="@+id/priceText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="67,250.20 USDT"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_secondary"
+                    app:layout_constraintTop_toBottomOf="@id/symbolText"
+                    app:layout_constraintStart_toEndOf="@id/coinImage"
+                    app:layout_constraintEnd_toStartOf="@id/favoriteButton" />
+
+                <ImageButton
+                    android:id="@+id/create_alert"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/create_alert"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_alert"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/favoriteButton"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/favoriteButton"
+                    android:layout_width="51dp"
+                    android:layout_height="46dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/favorite"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_favorite_outline"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/favorite_yellow" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/chartCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_stroke"
+            app:cardBackgroundColor="@color/card_background"
+            app:layout_constraintTop_toBottomOf="@id/headerCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="32dp"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/chartTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_chart"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/notification_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/open_notification"
+                    android:layout_marginBottom="3dp"
+                    android:elevation="4dp"
+                    android:layout_marginStart="4dp"
+                    app:cornerRadius="8dp"
+                    app:layout_constraintStart_toEndOf="@id/chartTitleText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/interval_buttons"
+                    />
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/interval_buttons"
+                android:layout_width="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/chartTitleText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="parent"
+                app:chipSpacingHorizontal="4dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/m15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:elevation="4dp"
+                    android:text="@string/_15m"
+                    android:checkable="true"
+
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/m30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:checkable="true"
+                    android:elevation="4dp"
+
+                    android:text="@string/_30m"
+
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/h1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:checkable="true"
+                    android:text="@string/_1h"
+                    android:elevation="4dp"
+
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/h4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:elevation="4dp"
+                    android:text="@string/_4h"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/d1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:checkable="true"
+                    android:text="@string/_1d"
+                    android:elevation="4dp"
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/w1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:checkable="true"
+                    android:text="@string/_1w"
+                    android:elevation="4dp"
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/M1"
+                    android:checkable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipCornerRadius="8dp"
+                    android:text="@string/_1M"
+                    android:elevation="4dp"
+                    app:chipBackgroundColor="@color/card_stroke"/>
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+
+
+                <com.patrykandpatrick.vico.views.cartesian.CartesianChartView
+                    android:id="@+id/chartView"
+                    android:layout_width="0dp"
+                    android:layout_height="320dp"
+                    android:layout_marginTop="16dp"
+                    app:chartStyle="@style/ChartStyle"
+                    app:layout_constraintTop_toBottomOf="@id/interval_buttons"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

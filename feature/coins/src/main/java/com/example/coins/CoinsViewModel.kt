@@ -1,5 +1,6 @@
 package com.example.coins
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.coins.usecases.ObserveFavoriteCoinsUseCase
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 
 
 class CoinsViewModel(
-    private val observeFavoriteCoinsUseCase: ObserveFavoriteCoinsUseCase
+    private val observeFavoriteCoinsUseCase: ObserveFavoriteCoinsUseCase,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state= MutableStateFlow(CoinsUiState())
     val state: StateFlow<CoinsUiState> = _state.asStateFlow()
@@ -39,6 +41,8 @@ class CoinsViewModel(
            }.collect { coins -> _state.update { currentState-> currentState.copy(isLoading = false,coins=coins, errorMessage = null) } }
         }
     }
+
+
 
 }
 

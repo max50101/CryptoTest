@@ -36,6 +36,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
+    implementation(project(":core:datastore"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

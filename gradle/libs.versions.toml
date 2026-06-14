@@ -21,6 +21,8 @@ gson="2.12.0"
 room="2.8.4"
 glide="4.16.0"
 recyclerview = "1.4.0"
+datastore="1.2.1"
+vico = "3.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,7 +54,8 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 glide={group="com.github.bumptech.glide",name="glide",version.ref="glide"}
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
-
+datastore={group="androidx.datastore",name="datastore-preferences",version.ref="datastore"}
+vico-views = { group = "com.patrykandpatrick.vico", name = "views", version.ref = "vico" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

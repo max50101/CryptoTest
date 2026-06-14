@@ -10,19 +10,29 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/background" />
+            <option value="$PROJECT_DIR$/background/alert-worker" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/database" />
+            <option value="$PROJECT_DIR$/core/datastore" />
             <option value="$PROJECT_DIR$/core/model" />
+            <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/alerts" />
             <option value="$PROJECT_DIR$/data/coins" />
+            <option value="$PROJECT_DIR$/data/live-notification" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/alerts" />
             <option value="$PROJECT_DIR$/domain/coins" />
+            <option value="$PROJECT_DIR$/domain/live-notification" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/coin-alert" />
             <option value="$PROJECT_DIR$/feature/coin-details" />
             <option value="$PROJECT_DIR$/feature/coin-list" />
             <option value="$PROJECT_DIR$/feature/coins" />
+            <option value="$PROJECT_DIR$/feature/live-notification" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -53,11 +53,19 @@ dependencies {
     implementation(project(":feature:coins"))
     implementation(project(":feature:coin-details"))
     implementation(project(":feature:coin-list"))
+    implementation(project(":feature:coin-alert"))
+    implementation(project(":feature:live-notification"))
     implementation(project(":core:ui"))
     implementation(project(":domain:coins"))
     implementation(project(":core:network"))
     implementation(project(":data:coins"))
+    implementation(project(":data:alerts"))
+    implementation(project(":domain:live-notification"))
+    implementation(project(":data:live-notification"))
+    implementation(project(":domain:alerts"))
     implementation(project(":core:database"))
+    implementation(project(":core:datastore"))
+    implementation(project(":core:navigation"))
 
 
 

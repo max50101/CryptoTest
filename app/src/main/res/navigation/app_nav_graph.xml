@@ -15,6 +15,11 @@
         android:label="Coin List">
     </fragment>
 
+    <fragment
+        android:id="@+id/coinDetailsFragment"
+        android:name="com.example.coin_details.CoinDetailsFragment"
+        android:label="Coin Details"/>
+
 
 
 </navigation>

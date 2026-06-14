@@ -8,9 +8,11 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.database.AppDatabase;
+import com.example.database.features.AlertsDao;
 import com.example.database.features.CoinsDao;
 
 import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import kotlin.SinceKotlin;
@@ -20,8 +22,8 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    static AppDatabase provideAppDatabase(Application application){
-        return Room.databaseBuilder(application, AppDatabase.class,"crypto.db")
+    static AppDatabase provideAppDatabase(Application application) {
+        return Room.databaseBuilder(application, AppDatabase.class, "crypto.db")
                 .fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
@@ -34,9 +36,17 @@ public class DatabaseModule {
                 })
                 .build();
     }
+
     @Singleton
     @Provides
-    static CoinsDao provideCoinsDao(AppDatabase appDatabase){
+    static CoinsDao provideCoinsDao(AppDatabase appDatabase) {
         return appDatabase.coinsDao();
     }
+
+    @Singleton
+    @Provides
+    static AlertsDao provideAlertsDao(AppDatabase appDatabase){
+        return appDatabase.alertsDao();
+    }
+
 }
