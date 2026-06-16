@@ -11,6 +11,12 @@ interface CoinsApi {
     @GET("api/v3/ticker/price")
     suspend fun getCoinBySymbol(@Query("symbol") symbol:String): CoinPriceDto
 
+    @GET("api/v3/ticker/price")
+    suspend fun getCoinsPriceBySymbol(@Query("symbols")  symbols:List<String>):List<CoinPriceDto>
+
+    @GET("api/v3/ticker/price")
+    suspend fun getCoinsPriceBySymbol(@Query("symbols")  symbols: String):List<CoinPriceDto>
+
     @GET("api/v3/exchangeInfo")
     suspend fun getCoinDetails(@Query("symbol") symbol: String): CoinsInfoDto
 

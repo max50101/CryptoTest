@@ -2,6 +2,7 @@ package com.example.network.di;
 
 import com.example.network.NetworkSettings;
 import com.example.network.api.CoinsApi;
+import com.example.network.сonverters.CollectionQueryConverterFactory;
 
 import javax.inject.Singleton;
 
@@ -18,6 +19,7 @@ public class NetworkModule {
     @Provides
     static OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder()
+
                 .build();
     }
 
@@ -30,6 +32,7 @@ public class NetworkModule {
         return new Retrofit.Builder()
                 .baseUrl(NetworkSettings.BASE_URL)
                 .client(okHttpClient)
+                .addConverterFactory(new CollectionQueryConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

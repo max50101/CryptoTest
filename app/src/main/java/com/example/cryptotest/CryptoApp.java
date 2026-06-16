@@ -1,7 +1,14 @@
 package com.example.cryptotest;
 
 import android.app.Application;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.work.Configuration;
+
+import com.example.alert_worker.BootReceiver;
+import com.example.alert_worker.di.BootReceiverBackground;
+import com.example.alert_worker.factory.AppWorkerFactory;
 import com.example.coin_alert.AlertBottomSheet;
 import com.example.coin_alert.di.AlertBottomSheetFeatureInject;
 import com.example.coin_details.CoinDetailsFragment;
@@ -18,13 +25,19 @@ import com.example.live_notification.di.NotificationInjector;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.inject.Inject;
+
 public class CryptoApp extends Application implements CoinsFeatureInjector,
         CoinsListFeatureInjector,
         CoinDetailsFeatureInjector,
         AlertBottomSheetFeatureInject,
-        NotificationInjector {
+        BootReceiverBackground,
+        NotificationInjector, Configuration.Provider {
 
     private AppComponent appComponent;
+
+    @Inject
+    AppWorkerFactory appWorkerFactory;
 
     @Override
     public void onCreate() {
@@ -33,6 +46,7 @@ public class CryptoApp extends Application implements CoinsFeatureInjector,
         appComponent = DaggerAppComponent
                 .factory()
                 .create(this);
+        appComponent.inject(this);
     }
 
     public AppComponent getAppComponent() {
@@ -62,5 +76,19 @@ public class CryptoApp extends Application implements CoinsFeatureInjector,
     @Override
     public void inject(@NotNull NotificationForegroundService service){
         appComponent.inject(service);
+    }
+
+    @NonNull
+    @Override
+    public Configuration getWorkManagerConfiguration() {
+        Log.d("CryptoAPP","Work Manager configuration");
+        return new Configuration.Builder()
+                .setWorkerFactory(appWorkerFactory)
+                .build();
+    }
+
+    @Override
+    public void inject(@NotNull BootReceiver bootReceiver) {
+        appComponent.inject(bootReceiver);
     }
 }

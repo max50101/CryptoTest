@@ -2,11 +2,15 @@ package com.example.cryptotest.di;
 
 import android.app.Application;
 
+import com.example.alert_worker.BootReceiver;
+import com.example.alert_worker.di.AlertWorkerModule;
+import com.example.alert_worker.di.BootReceiverBackground;
 import com.example.alerts.di.AlertsDataModule;
 import com.example.coin_alert.AlertBottomSheet;
 import com.example.coin_details.CoinDetailsFragment;
 import com.example.coin_list.CoinListFragment;
 import com.example.coins.CoinsFragment;
+import com.example.cryptotest.CryptoApp;
 import com.example.data.coins.di.CoinsDataModule;
 import com.example.database.di.DatabaseModule;
 
@@ -27,7 +31,8 @@ import dagger.Component;
                 DatabaseModule.class,
                 AppNavigatorModule.class,
                 AlertsDataModule.class,
-                LiveNotificationModule.class
+                LiveNotificationModule.class,
+                AlertWorkerModule.class
         }
 )
 public interface AppComponent {
@@ -39,6 +44,10 @@ public interface AppComponent {
     void inject(AlertBottomSheet fragment);
 
     void inject(NotificationForegroundService service);
+
+    void inject(CryptoApp cryptoApp);
+
+    void inject(BootReceiver bootReceiver);
 
     @Component.Factory
     interface Factory {

@@ -23,6 +23,7 @@ glide="4.16.0"
 recyclerview = "1.4.0"
 datastore="1.2.1"
 vico = "3.2.1"
+work_version = "2.11.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +57,7 @@ glide={group="com.github.bumptech.glide",name="glide",version.ref="glide"}
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 datastore={group="androidx.datastore",name="datastore-preferences",version.ref="datastore"}
 vico-views = { group = "com.patrykandpatrick.vico", name = "views", version.ref = "vico" }
+worker={group="androidx.work",name="work-runtime-ktx",version.ref="work_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

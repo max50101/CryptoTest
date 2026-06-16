@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.dagger)
     annotationProcessor(libs.dagger.compiler)
-
+    implementation(libs.worker)
     //modules
 
     implementation(project(":feature:coins"))
@@ -62,6 +62,7 @@ dependencies {
     implementation(project(":data:alerts"))
     implementation(project(":domain:live-notification"))
     implementation(project(":data:live-notification"))
+    implementation(project(":background:alert-worker"))
     implementation(project(":domain:alerts"))
     implementation(project(":core:database"))
     implementation(project(":core:datastore"))

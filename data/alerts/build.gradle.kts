@@ -30,6 +30,7 @@ dependencies {
     implementation(project(":domain:alerts"))
     implementation(project(":core:model"))
     implementation(project(":core:database"))
+    implementation(project(":core:network"))
     annotationProcessor(libs.dagger.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

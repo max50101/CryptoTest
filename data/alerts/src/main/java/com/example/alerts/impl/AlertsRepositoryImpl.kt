@@ -22,6 +22,10 @@ class AlertsRepositoryImpl @Inject constructor(private val alertsDao: AlertsDao)
         alertsDao.insertAlert(alert.toAlertEntity())
     }
 
+    override suspend fun getAlertsByStatus(): List<Alert> {
+        return alertsDao.getAlertsByStatus(AlertStatusEntity.ACTIVE).map { it.toAlert() }
+    }
+
     override fun observeAlertsByStatus(status: String): Flow<Alert> {
         TODO("Not yet implemented")
     }
@@ -34,7 +38,7 @@ class AlertsRepositoryImpl @Inject constructor(private val alertsDao: AlertsDao)
     override suspend fun setStatus(
         id: Long,
         status: AlertStatus
-    ): Flow<Alert> {
-        TODO("Not yet implemented")
+    ) {
+        alertsDao.updateStatus(id,status.toEntity())
     }
 }
