@@ -69,11 +69,11 @@ class IpcConnectionMarketScan @Inject constructor(private val application: Appli
         }
 
         override fun onProgress(taskId: Long, processed: Int, total: Int, currentSymbol: String?) {
-            Log.i("Connection callback","onProgress")
+            Log.i("Connection callback",currentSymbol?:"empty")
         }
 
         override fun onSignalFound(taskId: Long, signal: MarketSignalDto?) {
-            Log.i("Connection callback","onSignalFound")
+            Log.i("Connection callback",signal.toString()?:"emty")
         }
 
         override fun onCompleted(taskId: Long, signals: List<MarketSignalDto?>?) {

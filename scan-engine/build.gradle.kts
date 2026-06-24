@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+    implementation(libs.gson)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter)
     implementation(project(":core:scanner-api"))
