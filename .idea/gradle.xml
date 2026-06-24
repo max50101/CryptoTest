@@ -18,21 +18,26 @@
             <option value="$PROJECT_DIR$/core/model" />
             <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/network" />
+            <option value="$PROJECT_DIR$/core/scanner-api" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/alerts" />
             <option value="$PROJECT_DIR$/data/coins" />
             <option value="$PROJECT_DIR$/data/live-notification" />
+            <option value="$PROJECT_DIR$/data/market-scan" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/alerts" />
             <option value="$PROJECT_DIR$/domain/coins" />
             <option value="$PROJECT_DIR$/domain/live-notification" />
+            <option value="$PROJECT_DIR$/domain/market-scan" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/coin-alert" />
             <option value="$PROJECT_DIR$/feature/coin-details" />
             <option value="$PROJECT_DIR$/feature/coin-list" />
             <option value="$PROJECT_DIR$/feature/coins" />
             <option value="$PROJECT_DIR$/feature/live-notification" />
+            <option value="$PROJECT_DIR$/feature/market-scan" />
+            <option value="$PROJECT_DIR$/scan-engine" />
           </set>
         </option>
       </GradleProjectSettings>

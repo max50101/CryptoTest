@@ -12,4 +12,9 @@
         android:title="@string/coins_list"
         />
 
+    <item android:id="@+id/marketScanFragment"
+        android:icon="@drawable/ic_arrow_down"
+        android:title="@string/market_scan"
+        />
+
 </menu>

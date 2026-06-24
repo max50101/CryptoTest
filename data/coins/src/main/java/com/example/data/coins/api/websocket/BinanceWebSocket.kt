@@ -24,7 +24,9 @@ import java.util.Locale.getDefault
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
-
+inline fun <reified T> Gson.fromJsonTyped(json:String):T{
+    return fromJson(json,T::class.java)
+}
 
 class BinanceWebSocket @Inject constructor(val okHttp: OkHttpClient) {
     private val gson= Gson()
@@ -133,7 +135,7 @@ class BinanceWebSocket @Inject constructor(val okHttp: OkHttpClient) {
 
     private fun parsePriceUpdate(text:String): PriceUpdated?{
         return runCatching {
-            val dto=gson.fromJson(text, BinanceTradeStreamDto::class.java)
+            val dto: BinanceTradeStreamDto=gson.fromJsonTyped(text)
             PriceUpdated(
                 dto.data.s,dto.data.p
             )
@@ -142,7 +144,7 @@ class BinanceWebSocket @Inject constructor(val okHttp: OkHttpClient) {
 
     private fun parseBinanceKline(text:String): BinanceClassDto?{
         return runCatching {
-            val dto=gson.fromJson(text, BinanceStreamKline::class.java)
+            val dto: BinanceStreamKline=gson.fromJsonTyped(text)
             dto.data.k
         }.getOrNull()
     }

@@ -22,6 +22,8 @@ import com.example.cryptotest.di.DaggerAppComponent;
 
 import com.example.feature.live_notification.NotificationForegroundService;
 import com.example.live_notification.di.NotificationInjector;
+import com.example.market_scan.MarketScanFragment;
+import com.example.market_scan.di.MarketScanInjector;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +34,7 @@ public class CryptoApp extends Application implements CoinsFeatureInjector,
         CoinDetailsFeatureInjector,
         AlertBottomSheetFeatureInject,
         BootReceiverBackground,
-        NotificationInjector, Configuration.Provider {
+        NotificationInjector, MarketScanInjector, Configuration.Provider {
 
     private AppComponent appComponent;
 
@@ -90,5 +92,10 @@ public class CryptoApp extends Application implements CoinsFeatureInjector,
     @Override
     public void inject(@NotNull BootReceiver bootReceiver) {
         appComponent.inject(bootReceiver);
+    }
+
+    @Override
+    public void inject(@NotNull MarketScanFragment fragment) {
+        appComponent.inject(fragment);
     }
 }

@@ -2,4 +2,5 @@
     <string name="app_name">CryptoTest</string>
     <string name="coins">Coins</string>
     <string name="coins_list">Coins List</string>
+    <string name="market_scan">Market scan</string>
 </resources>

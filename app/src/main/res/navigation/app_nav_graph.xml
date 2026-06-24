@@ -18,7 +18,15 @@
     <fragment
         android:id="@+id/coinDetailsFragment"
         android:name="com.example.coin_details.CoinDetailsFragment"
-        android:label="Coin Details"/>
+        android:label="Coin Details">
+        <deepLink
+            app:uri="myapp://details/{symbol}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/marketScanFragment"
+        android:name="com.example.market_scan.MarketScanFragment"
+        android:label="Market scan"/>
 
 
 

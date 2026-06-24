@@ -63,4 +63,5 @@ worker={group="androidx.work",name="work-runtime-ktx",version.ref="work_version"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+parcelize={id="kotlin-parcelize"}
 android-legacy-kapt = { id = "com.android.legacy-kapt", version.ref = "agp" }

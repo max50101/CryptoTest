@@ -16,6 +16,8 @@ import com.example.database.di.DatabaseModule;
 
 import com.example.feature.live_notification.NotificationForegroundService;
 import com.example.live_notification.di.LiveNotificationModule;
+import com.example.market_scan.MarketScanFragment;
+import com.example.market_scan.di.MarketScanModule;
 import com.example.network.di.NetworkModule;
 
 import javax.inject.Singleton;
@@ -32,7 +34,8 @@ import dagger.Component;
                 AppNavigatorModule.class,
                 AlertsDataModule.class,
                 LiveNotificationModule.class,
-                AlertWorkerModule.class
+                AlertWorkerModule.class,
+                MarketScanModule.class,
         }
 )
 public interface AppComponent {
@@ -48,6 +51,7 @@ public interface AppComponent {
     void inject(CryptoApp cryptoApp);
 
     void inject(BootReceiver bootReceiver);
+    void inject(MarketScanFragment fragment);
 
     @Component.Factory
     interface Factory {

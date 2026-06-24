@@ -67,6 +67,10 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:datastore"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:scanner-api"))
+    implementation(project(":domain:market-scan"))
+    implementation(project(":data:market-scan"))
+    implementation(project(":feature:market-scan"))
 
 
 
