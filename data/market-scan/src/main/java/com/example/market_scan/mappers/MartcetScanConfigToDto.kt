@@ -16,17 +16,19 @@ fun MarketScanConfig.toDto(): MarketScanOptionsDto{
 }
 
 fun MarketSignalDto.toDomain(): MarketSignal{
-    return MarketSignal(symbol,type.toSignalType(),description,score,priceChangePercent,volumeSpikeMultiplier)
+    return MarketSignal(symbol,type.toSignalType(priceChangePercent),description,score,priceChangePercent,volumeSpikeMultiplier)
 }
 
-private fun String.toSignalType(): SignalType {
+private fun String.toSignalType(priceChangePercent: Double): SignalType {
     return when (this) {
         "VOLUME_SPIKE" -> SignalType.VolumeSpike
+        "PRICE_CHANGE_24H" -> if (priceChangePercent < 0.0) SignalType.PriceDump else SignalType.PricePump
         "PRICE_PUMP" -> SignalType.PricePump
         "PRICE_DUMP" -> SignalType.PriceDump
         "BREAKOUT" -> SignalType.Breakout
         "HIGH_VOLATILITY" -> SignalType.HighVolatility
         "RSI"-> SignalType.RSI
+        "RSI_SPIKE" -> SignalType.RSI
         else -> SignalType.UNKNOWN
     }
 }
