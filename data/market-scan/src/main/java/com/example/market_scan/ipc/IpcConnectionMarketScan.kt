@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.util.Log
+import com.example.market_scan.mappers.toDomain
 import com.example.market_scan.mappers.toDto
 import com.example.market_scan.model.MarketScanConfig
 import com.example.market_scan.model.MarketScanState
@@ -16,6 +17,7 @@ import com.example.scanner_api.IMarketScanService
 import com.example.scanner_api.MarketSignalDto
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 class IpcConnectionMarketScan @Inject constructor(private val application: Application) {
@@ -65,27 +67,51 @@ class IpcConnectionMarketScan @Inject constructor(private val application: Appli
 
     private val connectionCallback: IMarketScanCallback= object : IMarketScanCallback.Stub() {
         override fun onStarted(taskId: Long) {
-            Log.i("Connection callback","Started")
+            _marketScanState.value= MarketScanState.Running(taskId,0,0,null,emptyList())
         }
 
         override fun onProgress(taskId: Long, processed: Int, total: Int, currentSymbol: String?) {
-            Log.i("Connection callback",currentSymbol?:"empty")
+            val oldSignals=if(_marketScanState.value is MarketScanState.Running){
+                (_marketScanState.value as MarketScanState.Running).signals
+            } else emptyList()
+            _marketScanState.value= MarketScanState.Running(taskId,processed,total,currentSymbol,oldSignals)
         }
 
         override fun onSignalFound(taskId: Long, signal: MarketSignalDto?) {
-            Log.i("Connection callback",signal.toString()?:"emty")
+            val oldSignals=if(_marketScanState.value is MarketScanState.Running){
+                (_marketScanState.value as MarketScanState.Running).signals
+            } else emptyList()
+            val current=_marketScanState.value
+            if(current is MarketScanState.Running){
+                _marketScanState.value=current.copy(signals=oldSignals+signal!!.toDomain())
+            }
+
         }
 
         override fun onCompleted(taskId: Long, signals: List<MarketSignalDto?>?) {
-            Log.i("Connection callback","onCompleted")
+            currentTaskId = null
+
+            _marketScanState.value = MarketScanState.Completed(
+                taskId = taskId,
+                signals = signals!!.map { it!!.toDomain() }
+            )
         }
 
         override fun onError(taskId: Long, message: String?) {
-            Log.i("Connection callback","onError")
+            currentTaskId = null
+
+            _marketScanState.value = MarketScanState.Error(
+                taskId = taskId,
+                message = message?:""
+            )
         }
 
         override fun onCancelled(taskId: Long) {
-            Log.i("ConnectionCallback", "onCancelled taskId=$taskId")
+            currentTaskId = null
+
+            _marketScanState.value = MarketScanState.Cancelled(
+                taskId = taskId
+            )
         }
 
 

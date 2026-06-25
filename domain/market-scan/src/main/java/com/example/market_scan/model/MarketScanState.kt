@@ -4,6 +4,7 @@ sealed interface MarketScanState {
 
     data object Idle : MarketScanState
 
+
     data class Running(
         val taskId: Long,
         val processed: Int,
@@ -50,5 +51,6 @@ enum class SignalType {
     PriceDump,
     Breakout,
     HighVolatility,
-    RSI
+    RSI,
+    UNKNOWN,
 }
